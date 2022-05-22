@@ -1,9 +1,6 @@
 import math
 import sys
 
-def all_same(list):
-    return list.count(list[0]) == len(list)
-
 filename = sys.argv[1]
 
 nums = []
@@ -13,37 +10,23 @@ for line in file:
     nums.append(int(line))
 file.close()
 
-sum = 0
-for number in nums:
-    sum += number
+average_round_down = math.floor(sum(nums) / len(nums))
+average_round_up = average_round_down + 1
 
-average_c = math.ceil(sum / len(nums))
-average_f = math.floor(sum / len(nums))
-
-nums_c = nums.copy()
-nums_f = nums.copy()
 length = len(nums)
 counter_c = 0
 counter_f = 0
 
-while not all_same(nums_c):
-    for i in range(length):
-        if nums_c[i] == average_c:
-            continue
+for number in nums:
+    if number < average_round_down:
+        counter_f += average_round_down - number
+        counter_c += average_round_down - number + 1
+    elif number > average_round_up:
+        counter_c += number - average_round_up
+        counter_f += number - average_round_up + 1
+    elif number == average_round_down:
         counter_c += 1
-        if nums_c[i] > average_c:
-            nums_c[i] -= 1
-        else:
-            nums_c[i] += 1
-
-while not all_same(nums_f):
-    for i in range(length):
-        if nums_f[i] == average_f:
-            continue
+    elif number == average_round_up:
         counter_f += 1
-        if nums_f[i] > average_f:
-            nums_f[i] -= 1
-        else:
-            nums_f[i] += 1
 
 print(str(min(counter_c, counter_f)))
