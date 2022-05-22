@@ -1,4 +1,5 @@
 import math
+import sys
 
 def all_same(list):
     return list.count(list[0]) == len(list)
