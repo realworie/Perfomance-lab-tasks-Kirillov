@@ -1,4 +1,5 @@
 import math
+import statistics
 import sys
 
 def count_steps(number_array, target_level):
@@ -16,7 +17,4 @@ for line in file:
     nums.append(int(line))
 file.close()
 
-average_round_down = math.floor(sum(nums) / len(nums))
-average_round_up = average_round_down + 1
-
-print(str(min(count_steps(nums, average_round_down), count_steps(nums, average_round_up))))
+print(count_steps(nums, math.floor(statistics.median(nums))))
