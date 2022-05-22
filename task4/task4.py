@@ -25,8 +25,6 @@ length = len(nums)
 counter_c = 0
 counter_f = 0
 
-print(nums)
-
 while not all_same(nums_c):
     for i in range(length):
         if nums_c[i] == average_c:
